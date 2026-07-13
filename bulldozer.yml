@@ -4,9 +4,6 @@ merge:
   trigger:
     labels:
       - mergewhenready
-    branches:
-      - main
-
   ignore:
     labels:
       - donotmerge
