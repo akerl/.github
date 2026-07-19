@@ -8,11 +8,6 @@ merge:
     labels:
       - donotmerge
 
-  method: squash
-
-  options:
-    squash:
-      title: pull_request_title
-      body: summarize_commits
+  method: ff-only
 
   allow_merge_with_no_checks: false
