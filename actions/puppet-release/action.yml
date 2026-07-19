@@ -1,0 +1,15 @@
+name: Release Puppet module
+description: Parse git tag and release Puppet module
+inputs:
+  api_key:
+    description: API key for Puppet Forge
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Set module version and release
+      run: |
+        jq ".version = \"${GITHUB_REF#refs/tags/}\"" metadata.json > tmp.json && mv tmp.json metadata.json
+        bundle exec rake release_from_tag
+      env:
+        BLACKSMITH_FORGE_API_KEY: ${{ inputs.api_key }}
