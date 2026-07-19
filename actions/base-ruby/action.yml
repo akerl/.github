@@ -8,9 +8,11 @@ runs:
       with:
         fetch-depth: 0
         submodules: recursive
-    - uses: ruby/setup-ruby@v1
+    - name: Install ruby
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: '4.0.5'
         bundler-cache: true
-    - name: Build
+    - name: Run rake
+      shell: bash
       run: bundle exec rake
