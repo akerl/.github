@@ -8,6 +8,7 @@ runs:
   using: composite
   steps:
     - name: Set module version and release
+      shell: bash
       run: |
         jq ".version = \"${GITHUB_REF#refs/tags/}\"" metadata.json > tmp.json && mv tmp.json metadata.json
         bundle exec rake release_from_tag
