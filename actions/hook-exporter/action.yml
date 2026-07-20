@@ -11,7 +11,7 @@ runs:
   using: composite
   steps:
   - name: Post to hook-exporter
-    run: exporter.sh
+    run: ${{ github.action_path }}/exporter.sh
     shell: bash
     env:
       EXPORTER_TOKEN: ${{ inputs.token }}
