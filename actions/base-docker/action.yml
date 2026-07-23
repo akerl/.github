@@ -1,5 +1,5 @@
 name: Base Docker CI
-description: Checkout repo, build docker container, and publish for main branch
+description: Checkout repo, build docker container, and run tests
 runs:
   using: composite
   steps:
@@ -19,7 +19,3 @@ runs:
     - name: Test container
       shell: bash
       run: ./scripts/test.sh
-    - name: Publish images
-      shell: bash
-      run: ./meta/publish.sh
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
