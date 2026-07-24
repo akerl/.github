@@ -16,3 +16,4 @@ runs:
     env:
       EXPORTER_TOKEN: ${{ inputs.token }}
       JOB_STATUS: ${{ inputs.status }}
+    if: always()
