@@ -19,7 +19,3 @@ runs:
     - name: Test container
       shell: bash
       run: ./scripts/test.sh
-    - name: Publish images
-      shell: bash
-      run: ./meta/publish.sh
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
