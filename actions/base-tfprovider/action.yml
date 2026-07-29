@@ -1,0 +1,18 @@
+name: Base terraform provider CI
+description: Checkout repo and run make
+inputs:
+  gpg_key:
+    description: GPG key ID
+    required: true
+runs:
+  using: composite
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v7
+    with:
+      submodules: recursive
+  - name: Build
+    shell: bash
+    run: make
+    env:
+      GPG_PRIVATE_KEY: ${{ inputs.gpg_key }}
