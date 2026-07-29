@@ -1,0 +1,32 @@
+name: Base terraform CI
+description: Checkout repo, download terraform, and run tf checks
+inputs:
+  tf_version:
+    description: Terraform version
+    required: false
+    default: 1.15.8
+  tf_is_workspace:
+    description: If true, run init and plan
+    required: false
+    default: 'false'
+runs:
+  using: composite
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v7
+    with:
+      submodules: recursive
+    - name: Download Terraform
+      run: "./scripts/download_terraform.sh ${{ inputs.tf_version }}"
+      shell: bash
+    - name: Init workspace
+      run: "~/tfbin/terraform init -upgrade -input=false"
+      shell: bash
+      if: inputs.tf_is_workspace == 'true'
+    - name: Check format
+      run: "~/tfbin/terraform fmt -write=false -diff=true -check"
+      shell: bash
+    - name: Check plan
+      run: "~/tfbin/terraform plan -detailed-exitcode -input=false"
+      shell: bash
+      if: inputs.tf_is_workspace == 'true'
