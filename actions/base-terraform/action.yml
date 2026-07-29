@@ -16,17 +16,17 @@ runs:
     uses: actions/checkout@v7
     with:
       submodules: recursive
-    - name: Download Terraform
-      run: "./scripts/download_terraform.sh ${{ inputs.tf_version }}"
-      shell: bash
-    - name: Init workspace
-      run: "~/tfbin/terraform init -upgrade -input=false"
-      shell: bash
-      if: inputs.tf_is_workspace == 'true'
-    - name: Check format
-      run: "~/tfbin/terraform fmt -write=false -diff=true -check"
-      shell: bash
-    - name: Check plan
-      run: "~/tfbin/terraform plan -detailed-exitcode -input=false"
-      shell: bash
-      if: inputs.tf_is_workspace == 'true'
+  - name: Download Terraform
+    run: "./scripts/download_terraform.sh ${{ inputs.tf_version }}"
+    shell: bash
+  - name: Init workspace
+    run: "~/tfbin/terraform init -upgrade -input=false"
+    shell: bash
+    if: inputs.tf_is_workspace == 'true'
+  - name: Check format
+    run: "~/tfbin/terraform fmt -write=false -diff=true -check"
+    shell: bash
+  - name: Check plan
+    run: "~/tfbin/terraform plan -detailed-exitcode -input=false"
+    shell: bash
+    if: inputs.tf_is_workspace == 'true'
